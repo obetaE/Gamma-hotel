@@ -1,0 +1,49 @@
+.container{
+    background-color: #1b0136;
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    align-items: center;
+    height: 4rem;
+}
+
+.right{
+    display: flex;
+    gap: 10px;
+    color: white;
+    align-items: center;
+    font-weight: 700;
+}
+
+.left{
+    color: #FF1493;
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.links{
+    padding: 8px 13px;
+    /* background-color: #45062B; */
+    border-radius: 13px;
+    transition: transform 0.5s ease-in-out ;
+}
+
+.links:hover{
+    text-decoration: underline;
+    color: #FF1493;
+
+}
+
+.book{
+    background-color: #8c18a7;
+    padding: 1rem;
+    transition: transform 0.5s ease-in-out;
+}
+
+.book:hover{
+    background-color: #974649;
+}
