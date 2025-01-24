@@ -24,6 +24,10 @@ Combine similar sections under dropdowns. For example:
 
     const navLinks = [
       {
+        path: "/",
+        title: "Home",
+      },
+      {
         path: "/room",
         title: "Rooms & Suites",
       },
@@ -43,9 +47,9 @@ Combine similar sections under dropdowns. For example:
       const pathName = usePathname();
     return (
       <div className={styles.container}>
-        <div className={`${styles.left} ${playfairDisplay.className}`}>
+        <Link href="/" className={`${styles.left} ${playfairDisplay.className}`}>
           Gamma Suites
-        </div>
+        </Link>
         <div className={styles.right}>
           {navLinks.map((links) => (
             <Link

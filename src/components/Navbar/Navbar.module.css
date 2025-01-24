@@ -38,6 +38,12 @@
 
 }
 
+.active{
+    text-decoration: underline;
+    color: #FF1493;
+
+}
+
 .book{
     background-color: #8c18a7;
     padding: 1rem;
