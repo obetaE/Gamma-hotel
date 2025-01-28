@@ -50,14 +50,14 @@ const Footer = () => {
             <tr>
               <td>
                 <Link
-                  href="https://www.facebook.com/profile.php?id=61558022143571"
+                  href="/"
                   className={styles.links}
                 >
                   <Image
                     src="https://res.cloudinary.com/dudlxsoui/image/upload/v1733071562/Facebook_hdstbv.png"
                     alt="Facebook"
                     width={30}
-                    height={30}
+                    height={40}
                   />
                 </Link>
               </td>
@@ -95,7 +95,7 @@ const Footer = () => {
             <tr>
               <td>
                 <Link
-                  href="https://x.com/Oicroft?t=xAfAW9Gz0kkdsk7pzjOcxQ&s=09"
+                  href="/"
                   className={styles.links}
                 >
                   <Image

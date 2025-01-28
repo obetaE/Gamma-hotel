@@ -1,15 +1,19 @@
 .container {
-  padding: 7px 2rem;
+  padding: 12px 2rem;
   color: white;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  background-color: #0c0115;
 }
 
 .top {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  padding-bottom: 1rem;
   justify-content: space-between;
+  border-bottom: solid rgba(255, 255, 255, 0.2) 1px;
+  align-items: flex-end;
 }
 
 .top p {
@@ -20,6 +24,7 @@
   width: 30%;
   display: flex;
   gap: 1.5rem;
+  align-items: center;
 }
 
 .button {
