@@ -14,7 +14,17 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "pixabay.com",
+        pathname: "/**", // Match all paths under res.cloudinary.com
+      },
+      {
+        protocol: "https",
         hostname: "cdn.pixabay.com",
+        pathname: "/**", // Match all paths under res.cloudinary.com
+      },
+      {
+        protocol: "https",
+        hostname: "img.daisyui.com",
         pathname: "/**", // Match all paths under res.cloudinary.com
       },
     ],
