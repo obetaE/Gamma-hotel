@@ -18,7 +18,7 @@ export default function HomeOptions(){
             </div>
 
             <div className={styles.cardBody}>
-              <h2 className={styles.cardTitle}>Life hack</h2>
+              <h2 className={styles.cardTitle}>Single Room</h2>
               <p>Exclusive & Beautiful Lounge</p>
               <div className={styles.cardActions}>
                 <button className={styles.button}>Book Now!</button>
@@ -36,7 +36,7 @@ export default function HomeOptions(){
             </div>
 
             <div className={styles.cardBody}>
-              <h2 className={styles.cardTitle}>Life hack</h2>
+              <h2 className={styles.cardTitle}>Single Room</h2>
               <p>Exclusive & Beautiful Lounge</p>
               <div className={styles.cardActions}>
                 <button className={styles.button}>Book Now!</button>
@@ -54,7 +54,7 @@ export default function HomeOptions(){
             </div>
 
             <div className={styles.cardBody}>
-              <h2 className={styles.cardTitle}>Life hack</h2>
+              <h2 className={styles.cardTitle}>Single Room</h2>
               <p>Exclusive & Beautiful Lounge</p>
               <div className={styles.cardActions}>
                 <button className={styles.button}>Book Now!</button>
@@ -76,7 +76,7 @@ export default function HomeOptions(){
             </div>
 
             <div className={styles.cardBody}>
-              <h2 className={styles.cardTitle}>Life hack</h2>
+              <h2 className={styles.cardTitle}>Single Room</h2>
               <p>Exclusive & Beautiful Lounge</p>
               <div className={styles.cardActions}>
                 <button className={styles.button}>Book Now!</button>
@@ -94,7 +94,7 @@ export default function HomeOptions(){
             </div>
 
             <div className={styles.cardBody}>
-              <h2 className={styles.cardTitle}>Life hack</h2>
+              <h2 className={styles.cardTitle}>Single Room</h2>
               <p>Exclusive & Beautiful Lounge</p>
               <div className={styles.cardActions}>
                 <button className={styles.button}>Book Now!</button>
@@ -112,7 +112,7 @@ export default function HomeOptions(){
             </div>
 
             <div className={styles.cardBody}>
-              <h2 className={styles.cardTitle}>Life hack</h2>
+              <h2 className={styles.cardTitle}>Single Room</h2>
               <p>Exclusive & Beautiful Lounge</p>
               <div className={styles.cardActions}>
                 <button className={styles.button}>Book Now!</button>

@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./home.module.css"
+import styles from "./home.module.css";
 import HomeSlider from "@/components/HomeSlider/HomeSlider";
 import HomeOptions from "@/components/HomeOptions/HomeOptions";
-
+import HomeAbout from "@/components/HomeAbout/HomeAbout";
 
 export default function Home() {
   return (
@@ -11,9 +11,12 @@ export default function Home() {
         <HomeSlider />
       </div>
       <div>
-        <HomeOptions/>
+        <HomeOptions />
       </div>
-       Slider For Houses Talking about the brand Single Component Footer
+      <div>
+        <HomeAbout />
+      </div>
+      Talking about the brand Single Component
     </div>
   );
 }
