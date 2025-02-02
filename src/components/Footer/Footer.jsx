@@ -8,10 +8,10 @@ const Footer = () => {
     <div className={styles.container}>
       <div className={styles.top}>
         <p>Join Our NewsLetter</p>
-        <div className={styles.subscribe}>
+        <form className={styles.subscribe}>
           <input type="email" placeholder="Enter your email"></input>
           <button className={styles.button}>Subscribe</button>
-        </div>
+        </form>
       </div>
       <div className={styles.bottom}>
         <table className={styles.table}>

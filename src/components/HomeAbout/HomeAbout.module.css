@@ -4,6 +4,7 @@
     height: 80vh;
     padding: 1rem 0;
     align-items: center;
+    /* background-color: #fff; */
 }
 
 .left{
@@ -35,4 +36,15 @@
     color: white;
     display: flex;
     align-items: end;
+}
+
+@media (max-width: 1090px){
+    .container{
+        height: 40vh;
+        height: 40dvh;
+    }
+
+    .right{
+        font-size: 1.7rem;
+    }
 }
