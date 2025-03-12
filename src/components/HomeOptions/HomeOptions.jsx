@@ -11,7 +11,7 @@ export default function HomeOptions(){
             <div className={styles.imageContainer}>
               <Image
                 src="https://cdn.pixabay.com/photo/2016/03/28/09/34/bedroom-1285156_640.jpg"
-                alt="car!"
+                alt="A Lounge Room"
                 fill
                 className={styles.image}
               />
@@ -29,7 +29,7 @@ export default function HomeOptions(){
             <div className={styles.imageContainer}>
               <Image
                 src="https://cdn.pixabay.com/photo/2016/03/28/09/34/bedroom-1285156_640.jpg"
-                alt="car!"
+                alt="A Lounge Room"
                 fill
                 className={styles.image}
               />
@@ -47,7 +47,7 @@ export default function HomeOptions(){
             <div className={styles.imageContainer}>
               <Image
                 src="https://cdn.pixabay.com/photo/2017/08/10/06/27/hotel-2619040_640.jpg"
-                alt="car!"
+                alt="A Lounge Room"
                 fill
                 className={styles.image}
               />
@@ -63,7 +63,9 @@ export default function HomeOptions(){
           </div>
         </div>
 
-        <Link href="/book" className={styles.Link}>See More</Link>
+        <Link href="/book" className={styles.Link}>
+          See More
+        </Link>
         <div className={styles.wrappers}>
           <div className={styles.card}>
             <div className={styles.imageContainer}>

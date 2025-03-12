@@ -3,6 +3,7 @@ import styles from "./home.module.css";
 import HomeSlider from "@/components/HomeSlider/HomeSlider";
 import HomeOptions from "@/components/HomeOptions/HomeOptions";
 import HomeAbout from "@/components/HomeAbout/HomeAbout";
+import HomeTesti from "@/components/HomeTesti/HomeTesti";
 
 export default function Home() {
   return (
@@ -16,7 +17,9 @@ export default function Home() {
       <div>
         <HomeAbout />
       </div>
-      Talking about the brand Single Component
+      <div>
+        <HomeTesti/>
+      </div>
     </div>
   );
 }

@@ -54,3 +54,68 @@
 .book:hover{
     background-color: #974649;
 }
+
+.sidecontainer{
+    display: none;
+    flex-direction: column;
+}
+
+.sideNav{
+    background-color: #1b0136;
+    position: fixed;
+    z-index: 1000;
+    width: 100vw;
+    width: 100dvw;
+    display: flex;
+    padding: 5px min(10px, 10%);
+    align-items: center;
+    height: 4rem;
+    overflow: none;
+}
+
+.sideHead{
+    width: 100vw;
+    width: 100dvw;
+    justify-content: space-between;
+    display: flex;
+}
+
+.menu{
+    background-color: #8c18a7;
+    color: white;
+    padding: 10px;
+    font-weight: 900;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.overlay{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: white;
+    align-items: center;
+    font-weight: 700;
+    width: 100%;
+    position: absolute;
+    z-index: 1000;
+    top: 15;
+    background: blue;
+}
+
+@media(max-width: 412px){
+    .container{
+        display: none;
+    }
+
+    .sidecontainer{
+        display: flex;
+    }
+}

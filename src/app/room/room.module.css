@@ -7,9 +7,9 @@
 }
 
 .header{
-    position: relative;
-    height: 25vh;
-    background-image: url('/welcome.jpg');
+  position: relative;
+  height: 30vh;
+  background-image: url('/landing.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -60,3 +60,44 @@
 .text span{
     font-weight: bold;
 }
+
+
+@media(max-width: 430px){
+  .container{
+    height: 50vh;
+    height: 50dvh;
+  }
+
+  .text{
+    /* text-align: start; */
+    padding: 10px;
+    max-width: 90%;
+  }
+
+  .text p {
+    font-size: 4.5rem;
+  }
+
+  .text span{
+    font-size: 13px;
+  }
+}
+
+
+@media (max-width: 380px){
+  .container{
+    height: 80vh;
+    height: 80dvh;
+  }
+}
+
+@media (max-width: 360px){
+  .container{
+    height: 80vh;
+    height: 80dvh;
+  }
+
+    .text p {
+    font-size: 4rem;
+  }
+}

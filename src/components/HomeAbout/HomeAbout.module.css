@@ -48,3 +48,34 @@
         font-size: 1.7rem;
     }
 }
+
+@media (max-width: 770px){
+    .right{
+        font-size: 1.4rem;
+    }
+
+    .left span{
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 470px){
+    .container{
+        padding: 10px 12px;
+        gap: 8px;
+    }
+
+    .right{
+        font-size: 14px;
+    }
+
+    .left span{
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 380){
+    .right{
+        font-size: 12px;
+    }
+}
