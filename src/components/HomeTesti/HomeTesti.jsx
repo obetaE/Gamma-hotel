@@ -5,6 +5,7 @@ import Image from "next/image";
 export default function HomeTesti(){
     return (
       <div className={styles.container}>
+      <p>Reviews from our Satisfied Customers</p>
         <div className={styles.wrapper}>
           <div className={styles.card}>
             <div className={styles.textbox}>

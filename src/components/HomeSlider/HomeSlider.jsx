@@ -65,12 +65,12 @@ export default function HomeSlider() {
         >
           <div className={styles.imgContainer}>
             <Image
-              src={image.path || "/fallback-image.jpg"}
+              src={image.path || "/landing.jpg"}
               alt={`Slide ${i + 1}`}
               fill
               onError={(e) => {
                 console.error(`Error loading image at index ${i}:`, e);
-                e.target.src = "/fallback-image.jpg";
+                e.target.src = "/landing.jpg";
               }}
             />
           </div>

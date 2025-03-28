@@ -9,6 +9,11 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**", // Match all paths under images.pexels.com
+      },
+      {
+        protocol: "https",
         hostname: "res.cloudinary.com",
         pathname: "/**", // Match all paths under res.cloudinary.com
       },

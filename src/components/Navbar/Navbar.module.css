@@ -19,6 +19,10 @@
     font-weight: 700;
 }
 
+.left .logo {
+  font-family: 'Playfair Display', serif;
+}
+
 .left{
     color: #FF1493;
     font-size: 1.5rem;

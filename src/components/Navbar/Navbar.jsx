@@ -3,13 +3,7 @@ import React from "react"
 import styles from "./Navbar.module.css"
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Playfair_Display } from 'next/font/google';
 import { useState } from "react"
-
-  const playfairDisplay = Playfair_Display({
-    subsets: ["latin"],
-    weight: ["400", "700"], // Adjust weights based on your needs
-  });
 
 
 export default function Home(){
@@ -53,7 +47,7 @@ Combine similar sections under dropdowns. For example:
         <div className={styles.container}>
           <Link
             href="/"
-            className={`${styles.left} ${playfairDisplay.className}`}
+            className={styles.left}
           >
             Gamma Suites
           </Link>
@@ -81,7 +75,7 @@ Combine similar sections under dropdowns. For example:
               <div>
                 <Link
                   href="/"
-                  className={`${styles.left} ${playfairDisplay.className}`}
+                  className={styles.left}
                 >
                   Gamma Suites
                 </Link>
