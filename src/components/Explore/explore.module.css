@@ -1,49 +1,120 @@
 .container {
-  padding: 1rem 0rem;
+  padding-top: 1rem;
   height: 100vh;
   height: 100dvh;
-  min-width: 500vw;
+  width: 100%;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
-.wrapper{
+/* Hide radio buttons */
+.radio {
+  display: none;
+}
+
+/* The slider wrapper */
+.slider {
+  display: flex;
   width: 100vw;
   height: 100vh;
   position: relative;
+  overflow: hidden;
+ 
 }
 
-
-.imgcontainer {
-  display: flex;
-  position: relative;
+/* Individual slides */
+.slide, .inactive {
+  position: absolute;
   width: 100%;
   height: 100vh;
-  z-index: 1; /* Lower z-index for the image */
+  /* opacity: 0; */
+  /* transition: opacity 0.6s ease-in-out; */
+  clip-path: circle(0% at 0% 50%);
+  transition: 1.5s;
+  transition-delay: 0s;
+  background-position: left;
 }
 
+.slide:nth-child(even){
+  clip-path: circle(0% at 100% 50%);
+  background-position: right;
+}
+
+/* Active slide (odd vs even) */
+.active:nth-child(odd) {
+  clip-path: circle(150% at 0% 50%);
+}
+.active:nth-child(even) {
+  clip-path: circle(150% at 100% 50%);
+}
+
+
+/* Ensure the first slide is visible */
+.radio:nth-child(1):checked ~ .slider .slide:nth-child(1),
+.radio:nth-child(2):checked ~ .slider .slide:nth-child(2),
+.radio:nth-child(3):checked ~ .slider .slide:nth-child(3),
+.radio:nth-child(4):checked ~ .slider .slide:nth-child(4),
+.radio:nth-child(5):checked ~ .slider .slide:nth-child(5), .active {
+  /* opacity: 1; */
+    clip-path: circle(150% at 50% 50%);
+    transition-delay: 1s;
+    background-position: center;
+}
+
+/* Image inside slide */
 .img {
   object-fit: cover;
-  z-index: 1; /* Ensure image is behind */
+  z-index: 1;
+   filter: blur(4px);
 }
 
+/* Title text */
 .title {
   color: white;
-  padding-left: 1.6rem; 
+  padding-left: 1.6rem;
   position: absolute;
-  z-index: 2; /* Higher z-index so it appears on top */
-  top: 40%; /* Adjust as needed */
+  z-index: 2;
+  top: 40%;
   left: 0;
 }
 
-.title p{
+.title p {
   font-size: 3.4rem;
-    font-weight: 700;
+  font-weight: 700;
 }
 
-.title span{
+.title span {
   font-size: 1rem;
+}
+
+/* Pagination dots */
+.dots {
+  position: absolute;
+  bottom: 70px;
+  z-index: 10000;
+  display: flex;
+  gap: 6px;
+}
+
+.dots label {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.5;
+  border: 2px solid #222;
+}
+
+/* Highlight the active dot */
+.radio:nth-child(1):checked ~ .dots label:nth-child(1),
+.radio:nth-child(2):checked ~ .dots label:nth-child(2),
+.radio:nth-child(3):checked ~ .dots label:nth-child(3),
+.radio:nth-child(4):checked ~ .dots label:nth-child(4),
+.radio:nth-child(5):checked ~ .dots label:nth-child(5) {
+  opacity: 1;
 }

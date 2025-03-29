@@ -32,6 +32,11 @@ const nextConfig = {
         hostname: "img.daisyui.com",
         pathname: "/**", // Match all paths under res.cloudinary.com
       },
+      {
+        protocol: "https",
+        hostname: "media.istockphoto.com",
+        pathname: "/**", // Match all paths under res.cloudinary.com
+      },
     ],
   },
 };
