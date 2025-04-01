@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import styles from "./explore.module.css";
+import styles from "./styles/hero.module.css";
 import Image from "next/image";
 
 const HeroCarousel = () => {
