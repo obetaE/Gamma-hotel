@@ -5,7 +5,14 @@ import Image from "next/image"
 const DiningSection = () => {
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>"Dining That Delights the Senses"</h1>
+      <div className={styles.header}>
+        <h1 className={styles.title}>"Dining That Delights the Senses"</h1>
+        <span className={styles.desc}>
+          "Our chefs curate a menu that blends local flavors with international
+          cuisines. Whether it's a romantic dinner under the stars or a casual
+          brunch with friends, every meal is a celebration."
+        </span>
+      </div>
       <div className={styles.slider}>
         <div className={styles.list}>
           <div className={styles.item} style={{ "--position": 1 }}>

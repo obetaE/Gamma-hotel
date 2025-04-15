@@ -1,7 +1,7 @@
 .container{
     background-color: #1b0136;
     position: fixed;
-    z-index: 1000;
+    z-index: 10000;
     width: 100vw;
     width: 100dvw;
     display: flex;

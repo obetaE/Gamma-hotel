@@ -3,10 +3,23 @@
     margin-top: 3rem;
 }
 
+.header{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 .title{
     color: white;
     font-size: 2rem;
     text-align: center;
+}
+
+.desc{
+    font-size: 10px;
+    color: white;
+    text-align: center;
+    width: 50%;
     margin-bottom: 1.5rem;
 }
 
