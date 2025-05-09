@@ -1,116 +1,111 @@
 "use client"
-import React from "react"
-import styles from "./Navbar.module.css"
+import React, { useEffect } from "react";
+import styles from "./Navbar.module.css";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useState } from "react"
+import { useState } from "react";
 
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
-export default function Home(){
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
-  const [open, setOpen] = useState(false)
+  const navLinks = [
+    { path: "/", title: "Home" },
+    { path: "/room", title: "Rooms & Suites" },
+    { path: "/explore", title: "Explore" },
+    { path: "/gallery", title: "Gallery" },
+    { path: "/contact", title: "Contact Us" },
+  ];
 
-  {
-    /*
-    Group Links:
-Combine similar sections under dropdowns. For example:
-"Rooms": Group "Rooms & Suites" and "Offers & Packages."
-"Explore": Group "Dining & Nightlife" and "Amenities."
-    */
-  } 
+  return (
+    <nav className={styles.navbar}>
+      {/* Desktop Navigation */}
+      <div className={styles.desktopNav}>
+        <Link href="/" className={styles.logo}>
+          Gamma Suites
+        </Link>
+        
+        <div className={styles.navLinks}>
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              href={link.path}
+              className={`${styles.link} ${
+                pathname === link.path ? styles.active : ""
+              }`}
+            >
+              {link.title}
+            </Link>
+          ))}
+          <Link href="/" className={styles.bookButton}>
+            Book Now
+          </Link>
+        </div>
+      </div>
 
-    const navLinks = [
-      {
-        path: "/",
-        title: "Home",
-      },
-      {
-        path: "/room",
-        title: "Rooms & Suites",
-      },
-      {
-        path: "/explore",
-        title: "Explore",
-      },
-      {
-        path: "/gallery",
-        title: "Gallery",
-      },
-      {
-        path: "/contact",
-        title: "Contact Us",
-      },
-    ];
-      const pathName = usePathname();
-    return (
-      <>
-        <div className={styles.container}>
-          <Link
-            href="/"
-            className={styles.left}
-          >
+      {/* Mobile Navigation */}
+      <div className={styles.mobileNav}>
+        <div className={styles.mobileHeader}>
+          <Link href="/" className={styles.logo}>
             Gamma Suites
           </Link>
-          <div className={styles.right}>
-            {navLinks.map((links) => (
+          <button
+            className={styles.menuButton}
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? (
+              <svg
+                className={styles.closeIcon}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            ) : (
+              <svg
+                className={styles.hamburger}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M3 12h18M3 6h18M3 18h18" />
+              </svg>
+            )}
+          </button>
+        </div>
+
+        <div className={`${styles.mobileMenu} ${isOpen ? styles.open : ""}`}>
+          <div className={styles.menuContent}>
+            {navLinks.map((link) => (
               <Link
-                key={links.path}
-                href={links.path}
-                className={`${styles.links} ${
-                  pathName === links.path && styles.active
+                key={link.path}
+                href={link.path}
+                className={`${styles.mobileLink} ${
+                  pathname === link.path ? styles.active : ""
                 }`}
               >
-                {links.title}
+                {link.title}
               </Link>
             ))}
-            <Link href="/" className={styles.book}>
+            <Link href="/" className={styles.mobileBookButton}>
               Book Now
             </Link>
           </div>
         </div>
-        {/* SIDENAV */}
-        <div className={styles.sidecontainer}>
-          <div className={styles.sideNav}>
-            <div className={styles.sideHead}>
-              <div>
-                <Link
-                  href="/"
-                  className={styles.left}
-                >
-                  Gamma Suites
-                </Link>
-              </div>
-
-              <div className="flex">
-                {open ? (
-                  <div onClick={() => setOpen(false)} className={styles.menu}>
-                    X
-                  </div>
-                ) : (
-                  <div onClick={() => setOpen(true)} className={styles.menu}>
-                    O
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-            { open && <div className={styles.overlay}>
-              {navLinks.map((links) => (
-                <Link
-                  key={links.path}
-                  href={links.path}
-                  className={`${styles.links} ${
-                    pathName === links.path && styles.active
-                  }`}
-                >
-                  {links.title}
-                </Link>
-              ))}
-              <Link href="/" className={styles.book}>
-                Book Now
-              </Link>
-            </div>}
-        </div>
-      </>
-    );
+      </div>
+    </nav>
+  );
 }

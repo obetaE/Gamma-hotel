@@ -2,7 +2,7 @@ import HeroCarousel from "@/components/Explore/HeroCarousel";
 import DiningSection from "@/components/Explore/DiningSection";
 import ExperiencesSection from "@/components/Explore/ExperiencesSection";
 import AttractionsCarousel from "@/components/Explore/AttractionsCarousel";
-import GalleryPreview from "@/components/Explore/GalleryPreview";
+
 
 const ExplorePage = () => {
   return (
@@ -11,7 +11,7 @@ const ExplorePage = () => {
       <DiningSection />
       <ExperiencesSection />
       <AttractionsCarousel />
-      <GalleryPreview />
+
     </main>
   );
 };

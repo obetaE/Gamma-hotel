@@ -11,22 +11,7 @@
     text-decoration: underline;
 }
 
-.more{
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: underline;
-}
 
-.bookmore{
-    background: var(--button);
-    padding: 1rem;
-    color: white;
-    font-weight: bold;
-    font-size: 1.2rem;
-    border-radius: 1rem;
-}
 
 .wrapper{
     width: 100%;
@@ -90,4 +75,12 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
+
+.footer p{
+    text-decoration: underline;
+    color: #FF1493;
+    font-size: 1.5rem;
+    padding-bottom: 2rem;
 }

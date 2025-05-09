@@ -1,10 +1,4 @@
 import React from 'react'
-import {
-  CakeIcon,
-  WifiIcon,
-  SparklesIcon,
-  HeartIcon,
-} from "@heroicons/react/24/outline";
 import styles from "./styles/exp.module.css"
 import Image from "next/image"
 import Link from 'next/link';
@@ -92,12 +86,7 @@ const ExperiencesSection = () => {
         </div>
       </div>
       <div className={styles.footer}>
-      <div className={styles.more}>
-        And so Much More :
-      </div>
-      <Link href="/room" className={styles.bookmore}>
-       Book Now
-      </Link>
+      <Link href="/room"> <p>With So Much To Offer</p></Link>
       </div>
     </div>
   );

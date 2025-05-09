@@ -1,125 +1,153 @@
-.container{
-    background-color: #1b0136;
-    position: fixed;
-    z-index: 10000;
-    width: 100vw;
-    width: 100dvw;
-    display: flex;
-    justify-content: space-between;
-    padding: 5px min(10px, 10%);
-    align-items: center;
-    height: 4rem;
+/* Navbar.module.css */
+
+/* Base styles */
+.navbar {
+  background: #1b0136;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1rem 2rem;
 }
 
-.right{
-    display: flex;
-    gap: 10px;
-    color: white;
-    align-items: center;
-    font-weight: 700;
+.logo {
+  color: #FF1493;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
 }
 
-.left .logo {
-  font-family: 'Playfair Display', serif;
+/* Desktop Navigation */
+.desktopNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.left{
-    color: #FF1493;
-    font-size: 1.5rem;
-    font-style: italic;
-    font-weight: 700;
+.navLinks {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
 }
 
-.links{
-    padding: 8px 13px;
-    /* background-color: #45062B; */
-    border-radius: 13px;
-    transition: transform 0.5s ease-in-out ;
+.link {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease;
 }
 
-.links:hover{
-    text-decoration: underline;
-    color: #FF1493;
-
+.link:hover,
+.active {
+  color: #FF1493;
+  text-decoration: underline;
 }
 
-.active{
-    text-decoration: underline;
-    color: #FF1493;
-
+.bookButton {
+  background: #8c18a7;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.3s ease;
 }
 
-.book{
-    background-color: #8c18a7;
-    padding: 1rem;
-    transition: transform 0.5s ease-in-out;
+.bookButton:hover {
+  background: #974649;
 }
 
-.book:hover{
-    background-color: #974649;
+/* Mobile Navigation */
+.mobileNav {
+  display: none;
 }
 
-.sidecontainer{
+.mobileHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+}
+
+.hamburger,
+.closeIcon {
+  width: 2rem;
+  height: 2rem;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.closeIcon {
+  transform: rotate(180deg);
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+}
+
+.mobileMenu.open {
+  transform: translateX(0);
+}
+
+.menuContent {
+  background: #1b0136;
+  width: 80%;
+  max-width: 300px;
+  height: 100%;
+  margin-left: auto;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.mobileLink {
+  color: white;
+  text-decoration: none;
+  padding: 1rem 0;
+  display: block;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: color 0.3s ease;
+}
+
+.mobileLink:hover {
+  color: #FF1493;
+}
+
+.mobileBookButton {
+  margin-top: 2rem;
+  background: #8c18a7;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  display: block;
+}
+
+/* Responsive Breakpoint */
+@media (max-width: 768px) {
+  .desktopNav {
     display: none;
-    flex-direction: column;
-}
+  }
 
-.sideNav{
-    background-color: #1b0136;
-    position: fixed;
-    z-index: 1000;
-    width: 100vw;
-    width: 100dvw;
-    display: flex;
-    padding: 5px min(10px, 10%);
-    align-items: center;
-    height: 4rem;
-    overflow: none;
-}
-
-.sideHead{
-    width: 100vw;
-    width: 100dvw;
-    justify-content: space-between;
-    display: flex;
-}
-
-.menu{
-    background-color: #8c18a7;
-    color: white;
-    padding: 10px;
-    font-weight: 900;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 100%;
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.overlay{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    color: white;
-    align-items: center;
-    font-weight: 700;
-    width: 100%;
-    position: absolute;
-    z-index: 1000;
-    top: 15;
-    background: blue;
-}
-
-@media(max-width: 412px){
-    .container{
-        display: none;
-    }
-
-    .sidecontainer{
-        display: flex;
-    }
+  .mobileNav {
+    display: block;
+  }
 }
