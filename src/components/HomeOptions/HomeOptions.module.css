@@ -1,107 +1,156 @@
-.container{
-    padding: 2rem;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    gap: 1rem;
-    height: 83vh;
-    height: 83dvh;
-    position: relative;
+/* HomeOptions.module.css */
+.container {
+  padding: 2rem 1rem;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
 }
 
-.Link{
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateY(-50%);
-    color: white;
-    font-weight: 700;
-    padding: 1rem 1.5rem;
-    background-color: var(--button);
-    z-index: 500;
-    border-radius: 1rem;
-}
-
-.wrapper{
-    display: flex;
-    width: 100%;
-    /* flex-wrap: wrap; */
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.wrappers{
-    display: flex;
-    width: 100%;
-    /* flex-wrap: wrap; */
-    align-items: center;
-    justify-content: space-evenly;
-        filter: blur(6px);
+.cardsWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.1); /* Glass effect */
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 10px;
-  width: 24rem; /* Equivalent to w-96 */
-  overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: visible;
+}
+
+
+/* Add these new rules */
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: -10%;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 15%,
+    rgba(255, 255, 255, 0.01) 30%,
+    transparent 50%
+  );
+  transform: scaleY(-1) translateY(100%);
+  filter: blur(5px);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.card:hover::after {
+  opacity: 0.9;
+  transform: scaleY(-1) translateY(100%) scale(1.05);
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .imageContainer {
   position: relative;
   width: 100%;
-  height: 16rem; /* Equivalent to h-64 */
+  aspect-ratio: 4/3;
 }
 
 .image {
   object-fit: cover;
-  border-radius: 10px;
 }
 
 .cardBody {
-  padding: 1.5rem;
+  padding: 1.25rem;
 }
 
 .cardTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.cardBody p {
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  color: #e5e5e5;
+  margin-bottom: 1rem;
 }
 
 .cardActions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 1rem;
 }
 
 .button {
-  background-color: #007bff; /* Equivalent to btn-primary */
+  background-color: #007bff;
   color: white;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
 }
 
 .button:hover {
   background-color: #0056b3;
 }
 
-
-@media (max-width: 1090px) {
-  .container{
-    height: 39vh;
-    height: 39dvh;
-  }
-
-
-  .card{
-    width: 17rem;
-  }
-
-  .imageContainer {
-  height: 15rem; /* Equivalent to h-64 */
+.link {
+  display: inline-block;
+  width: fit-content;
+  margin: 1rem auto;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  background-color: var(--button);
+  border-radius: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease;
 }
+
+.link:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .cardsWrapper {
+    gap: 1rem;
+  }
+  
+  .cardBody {
+    padding: 1rem;
+  }
+  
+  .button {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    border-radius: 8px;
+  }
+  
+  .imageContainer {
+    aspect-ratio: 3/2;
+  }
+  
+  .link {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
 }

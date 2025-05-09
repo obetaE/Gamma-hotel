@@ -1,67 +1,168 @@
-.container{
-    padding: 1rem 0;
+/* HomeTesti.module.css */
+.container {
+  padding: 2rem 1rem;
+  max-width: 1500px;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
-.container p{
-    padding: 10px 15px;
-    font-weight: bold;
-    text-align: center;
-    color: white;
+.sliderContainer {
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
 }
 
-.wrapper{
-    display: flex;
-    width: 100%;
-    /* flex-wrap: wrap; */
-    align-items: center;
-    justify-content: space-evenly;
+.sliderWrapper {
+  display: flex;
+  animation: slide 40s linear infinite;
+  width: max-content;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.1); /* Glass effect */
+  max-width: 300px;
+  margin-right: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Pause animation on hover */
+.sliderWrapper:hover {
+  animation-play-state: paused;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sliderWrapper {
+    animation-duration: 30s;
+  }
+  
+  .card {
+    min-width: 250px;
+    margin-right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sliderWrapper {
+    animation-duration: 25s;
+  }
+  
+  .card {
+    min-width: 200px;
+  }
+}
+
+.title {
+  text-align: center;
+  color: white;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 2rem;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+ .card {
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 10px;
-  width: 15rem; /* Equivalent to w-96 */
+  padding: 1.5rem;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.textbox {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.textbox span {
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  color: rgba(255, 255, 255, 0.5);
+  display: block;
+  line-height: 1;
+}
+
+.textbox span:last-child {
+  text-align: right;
+}
+
+.textbox p {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  line-height: 1.6;
+  color: white;
+  margin: 1rem 0;
+}
+
+.client {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.imageContainer {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  min-width: 3rem;
+  border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 10px 15px;
 }
 
-.card span{
-    font-weight: 800;
-    font-size: 2rem;
+.author {
+  font-weight: 600;
+  color: white;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  margin: 0;
 }
 
-.card p{
-    font-size: 10px;
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .wrapper {
+    gap: 1rem;
+  }
+  
+  .card {
+    padding: 1rem;
+  }
 }
 
-.textbox{
-    border-bottom: 1px solid #fcfcfc;
-}
-
-.client{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 1px;
-}
-
-.client section{
-    flex: 1;
-    font-weight: bold;
-    color: #fcfcfc;
-    text-align: end;
-}
-
-.imageContainer{
-    position: relative;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 100%;
-    overflow: hidden;
-}
-
-.img{
-    object-fit: cover;
+@media (max-width: 480px) {
+  .title {
+    margin-bottom: 1.5rem;
+  }
+  
+  .textbox p {
+    margin: 0.5rem 0;
+  }
+  
+  .client {
+    gap: 0.75rem;
+  }
+  
+  .imageContainer {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }
