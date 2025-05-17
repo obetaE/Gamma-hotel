@@ -41,7 +41,7 @@ export default function HomeSlider() {
   return (
     <div className={styles.container}>
       <div className={styles.text}>
-        <p >Gamma Suites</p>
+        <p className={styles.title}>Gamma Suites</p>
         <span>
           "Escape the Ordinary, Embrace the Nightlife! Book Your Stay at Gamma
           Suites and Let the Dazzling Lights Lead You to Unforgettable

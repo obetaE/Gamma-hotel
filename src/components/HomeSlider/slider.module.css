@@ -8,6 +8,11 @@
   background-color: #31203a;
 }
 
+/* 
+.title{
+  font-weight: bold;
+} */
+
 .slide {
   position: absolute;
   width: 100%;

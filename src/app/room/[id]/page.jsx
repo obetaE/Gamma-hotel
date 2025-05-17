@@ -1,74 +1,76 @@
-import React from 'react'
-import styles from "./sroom.module.css"
-import Image from "next/image"
-import Rating from "@/components/Rating/Rating"
-import Link from "next/link"
+import React from 'react';
+import styles from './sroom.module.css';
+import Image from 'next/image';
+import Link from 'next/link';
+import Rating from '@/components/Rating/Rating';
 
-const singleRoom = async ({params}) => {
-    const { id } = await params;
+export default async function SingleRoom({ params }) {
+  const id = Number(params.id);
+  // Here you’d fetch room data by id; for now we hard-code:
+  const room = {
+    name: 'Single Room',
+    tagline: 'Cozy, perfect for solo travelers',
+    description:
+      'A comfortable space designed for solo guests seeking tranquility and modern convenience. Enjoy a peaceful stay with all the essentials at your fingertips.',
+    image: '/landing.jpg',
+    amenities: [
+      'Free Wi-Fi',
+      'Flat-screen TV',
+      'Air Conditioning',
+      'Work Desk',
+      'Private Bathroom',
+    ],
+    price: 234,
+    reviews: 13,
+    status: 'Available',
+  };
+
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <Link href="/room" className={styles.back}>
-        <Image
-          src="/Back Button.png"
-          alt="Back Button"
-          width={20}
-          height={20}
-        />
-        Back
+        ← Back to Rooms
       </Link>
+
       <div className={styles.card}>
-        <div className={styles.cardimage}>
+        <div className={styles.imageArea}>
           <Image
-            src="/landing.jpg"
-            className={styles.img}
+            src={room.image}
+            alt={room.name}
             fill
-            alt="Single Room"
+            className={styles.image}
           />
         </div>
-        <div className={styles.cardbody}>
-          <div className={styles.cardhead}>
-            <div className={styles.top}>
-              <h2 className={styles.cardtitle}>Single Room</h2>
-              <div className={styles.review}>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <span>13 reviews</span>
-              </div>
-            </div>
 
-            <p>"Cozy, perfect for solo travelers"</p>
-            <p className={styles.desc}>
-              "A comfortable space designed for solo guests seeking tranquility
-              and modern convenience. Enjoy a peaceful stay with all the
-              essentials at your fingertips."
-            </p>
-            <p className={styles.amenities}>
-              Free Wi-Fi || Flat-screen TV || Air Conditioning || Work Desk ||
-              Private Bathroom
-            </p>
-          </div>
-          <div className={styles.details}>
-            <p className={styles.pernight}>
-              Starts from <span className={styles.price}>$234</span>
-              <span className={styles.night}>/PER NIGHT</span>
-            </p>
-          </div>
-          <div className={styles.cardactions}>
-            <div className={styles.detstatus}>
-              <span className={styles.status}>STATUS:</span>{" "}
-              <span className={styles.available}>Available</span>
+        <div className={styles.infoArea}>
+          <h1 className={styles.title}>{room.name}</h1>
+          <p className={styles.tagline}>{room.tagline}</p>
+          
+          <p className={styles.description}>{room.description}</p>
+
+          <ul className={styles.amenities}>
+            {room.amenities.map((amenity, i) => (
+              <li key={i} className={styles.amenityItem}>
+                {amenity}
+              </li>
+            ))}
+          </ul>
+
+          <div className={styles.footer}>
+            <div className={styles.price}>
+              From <span>${room.price}</span> / night
             </div>
-            <button className={styles.btn}>BOOK NOW</button>
+            <div className={styles.actions}>
+              <span className={`${styles.status} ${styles[room.status.toLowerCase()]}`}>
+                {room.status}
+              </span>
+              <button className={styles.bookButton}>Book Now</button>
+            </div>
           </div>
         </div>
       </div>
-      <Rating />
-    </div>
+      <div className={styles.ratingRow}>
+            <Rating value={room.reviews} /> <span>{room.reviews} reviews</span>
+          </div>
+    </section>
   );
 }
-
-export default singleRoom

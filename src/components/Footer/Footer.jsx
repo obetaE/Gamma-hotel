@@ -69,6 +69,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
+            <footer className={styles.footer}>
+        <p>Gamma Suites © 2024 | Midnight Luxury Redefined</p>
+      </footer>
     </div>
   );
 };

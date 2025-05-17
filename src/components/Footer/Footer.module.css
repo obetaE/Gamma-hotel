@@ -134,6 +134,15 @@
   color: #ff1493;
 }
 
+/* Footer */
+.footer {
+  background: #0c0115;
+  text-align: center;
+  padding: 2rem;
+  margin-top: 4rem;
+  color: #F4E8FF;
+}
+
 @media (min-width: 768px) {
   .top {
     flex-direction: row;

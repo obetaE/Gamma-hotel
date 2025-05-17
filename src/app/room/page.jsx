@@ -148,67 +148,36 @@ const roomsAndSuites = [
 
 
 const Room = () => {
-  return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        Rooms & Suites
-        <span>"Enjoy the best of Luxury and Comfort"</span>
-      </div>
-
-      <div className={styles.body}>
-        {roomsAndSuites.map((room, idx) => (
-          <div
-            key={room.index}
-            className={`${styles.card} ${idx % 2 !== 0 ? styles.reverse : ""}`}
-          >
-            {/* Image Container */}
-            <div className={styles.cardimage}>
-              <Image
-                src={room.image}
-                className={styles.img}
-                fill
-                alt={room.name}
-              />
+ return (
+    <section className={styles.wrapper}>
+      <h1 className={styles.title}>Rooms & Suites</h1>
+      <p className={styles.subtitle}>Enjoy the best of luxury and comfort</p>
+      <div className={styles.grid}>
+        {roomsAndSuites.map(room => (
+          <div key={room.index} className={styles.card}>
+            <div className={styles.image}>
+              <Image src={room.image} alt={room.name} fill className={styles.img} />
             </div>
-
-            {/* Card Content */}
-            <div className={styles.cardbody}>
-              <div className={styles.review}>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <span>13 reviews</span>
-              </div>
-
-              <div className={styles.cardhead}>
-                <h2 className={styles.cardtitle}>{room.name}</h2>
-                <p>{`"${room.tagline}"`}</p>
-              </div>
-
-              <div className={styles.details}>
-                <div className={styles.detstatus}>
-                  <span className={styles.status}>STATUS:</span>{" "}
-                  <span className={styles.available}>Available</span>
-                </div>
-
-                <p className={styles.pernight}>
-                  Starts from <span className={styles.price}>$234</span>
-                  <span className={styles.night}>/PER NIGHT</span>
-                </p>
-              </div>
-
-              <div className={styles.cardactions}>
-                <Link href={`/room/${room.index}`} className={styles.btn}>
-                  VIEW ROOM
+            <div className={styles.content}>
+              <h2 className={styles.roomName}>{room.name}</h2>
+              <p className={styles.tagline}>{room.tagline}</p>
+              <p className={styles.desc}>{room.description}</p>
+              <ul className={styles.amenities}>
+                {room.amenities.map((am, i) => (
+                  <li key={i} className={styles.amenity}>{am}</li>
+                ))}
+              </ul>
+              <div className={styles.footer}>
+                <span className={styles.price}>From $234/night</span>
+                <Link href={`/room/${room.index}`}>
+                  <button className={styles.button}>View Room</button>
                 </Link>
               </div>
             </div>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -41,7 +41,7 @@ export default function Navbar() {
               {link.title}
             </Link>
           ))}
-          <Link href="/" className={styles.bookButton}>
+          <Link href="/book" className={styles.bookButton}>
             Book Now
           </Link>
         </div>
