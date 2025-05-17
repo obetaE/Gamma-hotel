@@ -8,6 +8,15 @@
   --button: #8c18a7;
 }
 
+/* Lightbox overrides */
+:global(.yarl__slide_image) {
+  border-radius: 1rem !important;
+}
+
+:global(.yarl__thumbnails_thumbnail) {
+  border-radius: 0.5rem !important;
+}
+
 input{
   @apply w-[400px] border border-gray-200 py-2 px-6 bg-zinc-100/40;
 }

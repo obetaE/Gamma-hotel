@@ -1,14 +1,19 @@
+/* Gallery.module.css */
 .container {
-  padding: 4rem 2rem;
-  background: #121212;
+  padding: 6rem 2rem;
+  background: #0a0a0a;
   color: white;
+  min-height: 100vh;
+  padding-top: 2rem;
 }
 
 .heading {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 6vw, 3.5rem);
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   color: #a855f7;
+  font-weight: 700;
+  letter-spacing: -0.05em;
 }
 
 .filter {
@@ -16,59 +21,134 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  position: sticky;
+  top: 1rem;
+  z-index: 10;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  border-radius: 2rem;
+  max-width: fit-content;
+  margin: 0 auto 3rem;
 }
 
 .filterBtn {
-  background: #2e2e2e;
-  color: white;
-  padding: 0.6rem 1.2rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.8rem 1.8rem;
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s ease;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
 }
 
 .filterBtn:hover {
-  background: #a855f7;
-  color: #fff;
+  background: rgba(168, 85, 247, 0.2);
+  color: #a855f7;
 }
 
 .active {
   background: #a855f7;
+  color: white;
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .card {
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  border-radius: 0.8rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 1.2rem;
+  aspect-ratio: 3/4;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .image {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
-  display: block;
-  border-radius: 0.8rem;
-  transition: transform 0.3s ease;
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  transition: opacity 0.3s ease;
 }
 
 .label {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 0.3rem 0.8rem;
-  border-radius: 1rem;
-  font-size: 0.9rem;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  background: rgba(168, 85, 247, 0.9);
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
   color: white;
+  backdrop-filter: blur(4px);
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.card:hover .label {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+
+@media (max-width: 768px) {
+  .container {
+    padding: 4rem 1rem;
+  }
+  
+  .filter {
+    padding: 0.5rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .filterBtn {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem;
+  }
+  
+  .grid {
+    gap: 1rem;
+  }
+  
+  .label {
+    bottom: 1rem;
+    left: 1rem;
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+  }
 }
