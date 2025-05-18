@@ -96,7 +96,7 @@
 .dots {
   position: absolute;
   bottom: 70px;
-  z-index: 1000;
+  z-index: 800;
   display: flex;
   gap: 6px;
 }
@@ -119,3 +119,130 @@
 .radio:nth-child(5):checked ~ .dots label:nth-child(5) {
   opacity: 1;
 }
+
+/* Additional Improvements */
+.slider {
+  touch-action: pan-y; /* Enable vertical scroll on mobile */
+}
+
+.title {
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  padding: 0 2rem;
+}
+
+.title p {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Add smooth transition for text */
+.title p, .title span {
+  transition: all 0.3s ease;
+}
+
+
+/* Tablet Styles (768px and below) */
+@media (max-width: 768px) {
+  .container {
+    height: 70vh;
+  }
+
+  .title {
+    top: 35%;
+    padding: 0 1rem;
+    text-align: center;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .title p {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+
+  .title span {
+    font-size: 1.1rem;
+    display: block;
+    margin-top: 1rem;
+  }
+
+  .dots {
+    bottom: 30px;
+  }
+
+  .dots label {
+    width: 15px;
+    height: 15px;
+  }
+
+  .slide, .inactive {
+    background-position: center;
+  }
+
+  .img {
+    filter: blur(2px);
+  }
+}
+
+/* Mobile Styles (480px and below) */
+@media (max-width: 480px) {
+  .container {
+    height: 60vh;
+  }
+
+  .title{
+    top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  }
+
+  .title p {
+    font-size: 1.8rem;
+  }
+
+  .title span {
+    font-size: 0.9rem;
+    padding: 0 1rem;
+  }
+
+  .dots {
+    bottom: 20px;
+    gap: 4px;
+  }
+
+  .dots label {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Adjust clip-path values for smaller screens */
+  .slide {
+    clip-path: circle(0% at 50% 50%) !important;
+  }
+  
+  .active {
+    clip-path: circle(150% at 50% 50%) !important;
+  }
+}
+
+/* Mobile Landscape Orientation */
+@media (max-width: 768px) and (orientation: landscape) {
+  .container {
+    height: 100dvh;
+  }
+
+  .title {
+    top: 45%;
+  }
+
+  .title p {
+    font-size: 2rem;
+  }
+
+  .title span {
+    font-size: 0.9rem;
+  }
+}
+

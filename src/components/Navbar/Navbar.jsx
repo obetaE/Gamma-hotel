@@ -100,7 +100,7 @@ export default function Navbar() {
                 {link.title}
               </Link>
             ))}
-            <Link href="/" className={styles.mobileBookButton}>
+            <Link href="/book" className={styles.mobileBookButton}>
               Book Now
             </Link>
           </div>

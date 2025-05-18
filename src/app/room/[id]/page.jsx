@@ -26,7 +26,8 @@ export default async function SingleRoom({ params }) {
   };
 
   return (
-    <section className={styles.container}>
+    <div>
+      <section className={styles.container}>
       <Link href="/room" className={styles.back}>
         ← Back to Rooms
       </Link>
@@ -42,7 +43,10 @@ export default async function SingleRoom({ params }) {
         </div>
 
         <div className={styles.infoArea}>
-          <h1 className={styles.title}>{room.name}</h1>
+          <div className="flex justify-between items-center">
+            <h1 className={styles.title}>{room.name}</h1>
+          <span>{room.reviews} reviews</span>
+          </div>
           <p className={styles.tagline}>{room.tagline}</p>
           
           <p className={styles.description}>{room.description}</p>
@@ -68,9 +72,10 @@ export default async function SingleRoom({ params }) {
           </div>
         </div>
       </div>
-      <div className={styles.ratingRow}>
-            <Rating value={room.reviews} /> <span>{room.reviews} reviews</span>
-          </div>
     </section>
+    <div className={styles.ratingRow}>
+            <Rating value={room.reviews} /> 
+          </div>
+    </div>
   );
 }

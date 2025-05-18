@@ -51,7 +51,10 @@ const AttractionsSection = () => {
   const active = attractions[current];
 
   return (
-    <section className={styles.section}>
+    <div>
+       <h1 className={styles.title}>Enjoy the Nearby Scenery</h1>
+      <section className={styles.section}>
+     
       <div className={styles.imageArea}>
         <img src={active.image} alt={active.title} className={styles.mainImage} />
       </div>
@@ -82,6 +85,7 @@ const AttractionsSection = () => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 

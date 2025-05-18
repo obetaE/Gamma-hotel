@@ -6,169 +6,156 @@
   --deep-magenta: #45062b;
   --light-neutral: #F4E8FF;
   --neon-pink: #FF1493;
-  min-height: 100vh;
-  background: var(--primary-bg);
-  color: var(--light-neutral);
+  --neon-glow: 0 0 15px rgba(255, 20, 147, 0.5);
 }
 
 /* Hero Section */
 .hero {
-  position: relative;
   height: 60vh;
   background: linear-gradient(
     to bottom right,
     var(--primary-bg) 40%,
     var(--deep-magenta)
-  ), url('https://media.istockphoto.com/id/1480109377/photo/success-hands-or-toast-in-a-party-for-goals-winning-deal-or-new-year-at-luxury-social-event.jpg?s=612x612&w=0&k=20&c=7O7m7lG6LVXY-rzr1NE4aVgkJhxjAnS25PkSM_jTN9c=');
-  background-size: cover;
-  background-position: center;
-  display: grid;
-  place-items: center;
-  margin-bottom: 5rem;
+  );
+  position: relative;
+  overflow: hidden;
 }
 
 .heroContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  z-index: 2;
 }
 
-.title {
+.heroTitle {
   font-size: 4rem;
-  margin: 0;
   color: var(--light-neutral);
+  margin: 0;
+  text-shadow: var(--neon-glow);
   letter-spacing: 2px;
 }
 
-.subtitle {
+.heroSubtitle {
   font-size: 1.5rem;
   color: var(--neon-pink);
   margin-top: 1rem;
+  text-transform: uppercase;
 }
 
-/* Booking Form */
-.bookingSection {
-  max-width: 1200px;
-  margin: -100px auto 0;
+/* Room Grid */
+.main {
+  max-width: 1500px;
+  margin: -50px auto 0;
   padding: 2rem;
 }
 
-.bookingForm {
-  display: grid;
-  gap: 2rem;
-}
-
-.formCard {
-  background: var(--secondary-bg);
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-}
-
-.sectionTitle {
-  color: var(--neon-pink);
-  margin-top: 0;
-  font-size: 1.8rem;
-  border-bottom: 2px solid var(--accent);
-  padding-bottom: 0.5rem;
-}
-
-/* Input Styles */
-.inputGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.inputLabel {
-  color: var(--light-neutral);
-  font-weight: 300;
-  letter-spacing: 1px;
-}
-
-.dateInput, .textInput {
-  background: var(--primary-bg);
-  border: 1px solid var(--accent);
-  color: var(--light-neutral);
-  padding: 1rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.dateInput:focus, .textInput:focus {
-  outline: none;
-  border-color: var(--neon-pink);
-  box-shadow: 0 0 15px var(--neon-pink);
-}
-
-/* Room Selection */
 .roomGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 }
 
 .roomCard {
-  position: relative;
-  background: var(--primary-bg);
-  border-radius: 10px;
+  background: var(--secondary-bg);
+  border-radius: 20px;
   overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.roomCard:hover {
+  transform: translateY(-10px);
+}
+
+.imageContainer {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.roomImage {
+  object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.radioInput {
-  position: absolute;
-  opacity: 0;
+.roomCard:hover .roomImage {
+  transform: scale(1.05);
 }
 
-.roomLabel {
-  display: block;
-  padding: 1.5rem;
-  cursor: pointer;
+.roomContent {
+  padding: 2rem;
 }
 
-.radioInput:checked + .roomLabel {
-  background: var(--deep-magenta);
-}
-
-.roomName {
-  display: block;
-  font-size: 1.2rem;
+.roomTitle {
   color: var(--light-neutral);
+  font-size: 1.8rem;
+  margin: 0 0 1rem;
 }
 
-.roomPrice {
+.roomDescription {
+  color: #E6CCFF;
+  font-size: 1rem;
+  line-height: 1.5;
+  min-height: 60px;
+}
+
+/* Amenities */
+.amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.amenityPill {
+  background: var(--primary-bg);
+  color: var(--neon-pink);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  border: 1px solid var(--accent);
+}
+
+/* Price */
+.priceContainer {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.price {
+  font-size: 2.5rem;
   color: var(--neon-pink);
   font-weight: bold;
 }
 
-/* Payment Section */
-.creditCard {
-  background: linear-gradient(45deg, var(--secondary-bg), var(--primary-bg));
-  padding: 1.5rem;
-  border-radius: 15px;
+.night {
   color: var(--light-neutral);
-  min-width: 300px;
+  opacity: 0.8;
 }
 
-.cardLogo {
-  font-weight: bold;
-  letter-spacing: 2px;
-  color: var(--neon-pink);
-}
-
-/* Submit Button */
-.submitButton {
+/* CTA Button */
+.ctaButton {
   position: relative;
   background: var(--neon-pink);
   color: var(--light-neutral);
   border: none;
-  padding: 1.5rem 3rem;
-  border-radius: 50px;
-  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  font-size: 1.1rem;
   cursor: pointer;
   overflow: hidden;
+  width: 100%;
   transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  box-shadow: var(--neon-glow);
 }
 
 .buttonGlow {
@@ -182,23 +169,310 @@
   transition: opacity 0.3s ease;
 }
 
-.submitButton:hover .buttonGlow {
+.ctaButton:hover .buttonGlow {
   opacity: 1;
 }
 
+/* Highlight Badge */
+.highlightBadge {
+  position: absolute;
+  top: 20px;
+  right: -30px;
+  background: var(--neon-pink);
+  color: var(--light-neutral);
+  padding: 0.5rem 2rem;
+  transform: rotate(45deg);
+  font-size: 0.9rem;
+  z-index: 2;
+  box-shadow: var(--neon-glow);
+}
 
+/* CTA Section */
+.ctaSection {
+  background: var(--primary-bg);
+  padding: 4rem 2rem;
+  margin-top: 4rem;
+}
+
+.ctaContent {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ctaTitle {
+  color: var(--light-neutral);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.ctaText {
+  color: #E6CCFF;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* Add to CSS module */
+
+/* Trust Section */
+.trustSection {
+  background: var(--secondary-bg);
+  padding: 3rem 2rem;
+  margin: 4rem 0;
+}
+
+.trustContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.trustBadge {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--light-neutral);
+  font-size: 1.1rem;
+}
+
+
+.trustIcon {
+  font-size: 2.5rem;
+  color: var(--neon-pink);
+  filter: drop-shadow(0 0 5px rgba(255, 20, 147, 0.5));
+  transition: all 0.3s ease;
+}
+
+.trustBadge:hover .trustIcon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 10px var(--neon-pink));
+}
+
+/* Experience Grid */
+/* Experience Grid Section */
+.experienceGrid {
+  padding: 6rem 2rem;
+  background: var(--primary-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2.8rem;
+  color: var(--light-neutral);
+  margin-bottom: 4rem;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.sectionTitle::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 3px;
+  background: var(--neon-pink);
+  margin: 1rem auto 0;
+  box-shadow: 0 0 15px var(--neon-pink);
+}
+
+.gridContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+}
+
+.gridCard {
+  background: var(--secondary-bg);
+  padding: 2.5rem;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(140, 24, 167, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gridCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(140, 24, 167, 0.2);
+  border-color: var(--neon-pink);
+}
+
+.gridCard h3 {
+  color: var(--light-neutral);
+  font-size: 1.8rem;
+  margin: 1.5rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.gridCard p {
+  color: #E6CCFF;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  z-index: 1;
+  position: relative;
+}
+
+.gridNumber {
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  font-size: 5rem;
+  color: var(--neon-pink);
+  opacity: 0.15;
+  font-weight: 900;
+  font-family: monospace;
+  transition: all 0.4s ease;
+}
+
+.gridCard:hover .gridNumber {
+  opacity: 0.25;
+  transform: scale(1.05);
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .title {
+  .experienceGrid {
+    padding: 4rem 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+  }
+
+  .gridContainer {
+    gap: 2rem;
+  }
+
+  .gridCard {
+    padding: 2rem;
+    min-height: 250px;
+  }
+
+  .gridCard h3 {
+    font-size: 1.5rem;
+  }
+
+  .gridCard p {
+    font-size: 1rem;
+  }
+
+  .gridNumber {
+    font-size: 4rem;
+    top: -20px;
+    right: -25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 1.8rem;
+  }
+
+  .gridCard {
+    padding: 1.5rem;
+    min-height: auto;
+  }
+}
+
+/* Comparison Table */
+.comparison {
+  padding: 4rem 2rem;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 0 30px rgba(0,0,0,0.3);
+}
+
+.comparisonTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--secondary-bg);
+}
+
+.comparisonTable th,
+.comparisonTable td {
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid var(--accent);
+}
+
+.comparisonTable th {
+  background: var(--deep-magenta);
+  color: var(--light-neutral);
+  font-size: 1.1rem;
+}
+
+.comparisonTable td {
+  color: #E6CCFF;
+}
+
+.comparisonTable tr:nth-child(even) {
+  background: rgba(255,255,255,0.03);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .heroTitle {
     font-size: 2.5rem;
   }
-  
-  .bookingSection {
-    padding: 1rem;
+
+  .heroSubtitle {
+    font-size: 1.2rem;
   }
-  
-  .paymentGrid {
+
+  .roomGrid {
     grid-template-columns: 1fr;
+  }
+
+  .imageContainer {
+    height: 250px;
+  }
+
+  .roomTitle {
+    font-size: 1.5rem;
+  }
+
+  .price {
+    font-size: 2rem;
+  }
+
+  .ctaTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+
+  .roomContent {
+    padding: 1.5rem;
+  }
+
+  .ctaButton {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
   }
 }
