@@ -1,0 +1,99 @@
+.container {
+    background: linear-gradient(135deg, #45062b, #1b0136);
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("https://cdn.pixabay.com/photo/2015/11/02/20/27/tower-1019991_640.jpg") center/cover;
+    opacity: 0.15;
+  }
+  
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: white;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+  
+  .subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .primaryButton, .secondaryButton {
+    padding: 1rem 2.5rem;
+    border-radius: 30px;
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    font-weight: 500;
+  }
+  
+  .primaryButton {
+    background: #8c18a7;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(140, 24, 167, 0.3);
+  }
+  
+  .primaryButton:hover {
+    background: #7a1597;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(140, 24, 167, 0.5);
+  }
+  
+  .secondaryButton {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .secondaryButton:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 4rem 1.5rem;
+    }
+    
+    .buttonGroup {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .primaryButton, .secondaryButton {
+      width: 100%;
+      max-width: 300px;
+    }
+  }

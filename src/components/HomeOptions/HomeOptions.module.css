@@ -1,68 +1,72 @@
-/* HomeOptions.module.css */
 .container {
-  padding: 2rem 1rem;
+  padding: 5rem 2rem;
   width: 100%;
   max-width: 1500px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
   position: relative;
+}
+
+.header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+.sectionTitle {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: white;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  position: relative;
+  display: inline-block;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: #8c18a7;
+}
+
+.sectionSubtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+  margin: 1rem auto 0;
 }
 
 .cardsWrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
   width: 100%;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: rgba(49, 32, 58, 0.7);
   border-radius: 10px;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
-  overflow: visible;
-}
-
-
-/* Add these new rules */
-.card::after {
-  content: '';
-  position: absolute;
-  bottom: -10%;
-  left: 0;
-  right: 0;
-  height: 20%;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 15%,
-    rgba(255, 255, 255, 0.01) 30%,
-    transparent 50%
-  );
-  transform: scaleY(-1) translateY(100%);
-  filter: blur(5px);
-  opacity: 0.7;
-  transition: all 0.3s ease;
-  z-index: -1;
-}
-
-.card:hover::after {
-  opacity: 0.9;
-  transform: scaleY(-1) translateY(100%) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
 .imageContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 4/3;
+  height: 250px;
 }
 
 .image {
@@ -70,87 +74,128 @@
 }
 
 .cardBody {
-  padding: 1.25rem;
+  padding: 1.75rem;
+}
+
+.roomHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
 }
 
 .cardTitle {
   font-size: clamp(1.25rem, 2vw, 1.5rem);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: white;
+  margin: 0;
 }
 
-.cardBody p {
+.price {
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  color: #8c18a7;
+  font-weight: 600;
+  background: rgba(140, 24, 167, 0.15);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+
+.cardDescription {
   font-size: clamp(0.875rem, 1.5vw, 1rem);
-  color: #e5e5e5;
-  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
 }
 
 .cardActions {
   display: flex;
-  justify-content: flex-end;
+  gap: 1rem;
 }
 
 .button {
-  background-color: #007bff;
+  background: #8c18a7;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 30px;
   cursor: pointer;
   transition: background 0.3s ease;
   font-size: clamp(0.875rem, 1.5vw, 1rem);
+  flex: 1;
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background: #7a1597;
+}
+
+.secondaryButton {
+  background: transparent;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  flex: 1;
+}
+
+.secondaryButton:hover {
+  border-color: #8c18a7;
+  background: rgba(140, 24, 167, 0.1);
 }
 
 .link {
   display: inline-block;
   width: fit-content;
-  margin: 1rem auto;
+  margin: 1rem auto 0;
   color: white;
-  font-weight: 600;
-  padding: 0.75rem 2rem;
-  background-color: var(--button);
-  border-radius: 2rem;
+  font-weight: 500;
+  padding: 0.85rem 2.5rem;
+  background: rgba(140, 24, 167, 0.2);
+  border-radius: 30px;
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  border: 1px solid rgba(140, 24, 167, 0.4);
 }
 
 .link:hover {
-  transform: scale(1.05);
+  background: rgba(140, 24, 167, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(140, 24, 167, 0.2);
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: 1.5rem 0.5rem;
+    padding: 3rem 1rem;
   }
   
   .cardsWrapper {
-    gap: 1rem;
+    gap: 1.5rem;
   }
   
   .cardBody {
-    padding: 1rem;
+    padding: 1.25rem;
   }
   
-  .button {
-    padding: 0.5rem 0.75rem;
+  .button, .secondaryButton {
+    padding: 0.65rem 1.25rem;
   }
 }
 
 @media (max-width: 480px) {
-  .card {
-    border-radius: 8px;
+  .container {
+    padding: 2rem 0.5rem;
   }
   
   .imageContainer {
-    aspect-ratio: 3/2;
+    height: 200px;
   }
   
   .link {
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 1.75rem;
     font-size: 0.875rem;
   }
 }

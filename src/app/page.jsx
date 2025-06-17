@@ -4,21 +4,17 @@ import HomeSlider from "@/components/HomeSlider/HomeSlider";
 import HomeOptions from "@/components/HomeOptions/HomeOptions";
 import HomeAbout from "@/components/HomeAbout/HomeAbout";
 import HomeTesti from "@/components/HomeTesti/HomeTesti";
+import HomeCTA from "@/components/HomeCTA/HomeCTA";
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <HomeSlider />
-      </div>
-      <div>
-        <HomeOptions />
-      </div>
-      <div>
+      <HomeSlider />
+      <div className={styles.contentWrapper}>
         <HomeAbout />
-      </div>
-      <div>
-        <HomeTesti/>
+        <HomeOptions />
+        <HomeTesti />
+        <HomeCTA />
       </div>
     </div>
   );
