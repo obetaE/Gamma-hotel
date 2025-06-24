@@ -10,22 +10,22 @@ const adminPanel = () => {
   return (
     <div className={styles.container}>
       {open ? (
-        <button onClick={() => setOpen(true)} className={styles.addButton}>
-          <FaPlus /> Add New Room
+        <button onClick={() => setOpen(false)} className={styles.addButton}>
+          <span className={styles.x}>X</span> Close
         </button>
       ) : (
         <button onClick={() => setOpen(true)} className={styles.addButton}>
-          X Close
+          <FaPlus /> Add New Room
         </button>
       )}
 
       <div className={styles.left}>
         {open ? (
           <div className={styles.addRoom}>
-          <AddRoom />
-        </div>
-        ):(
-        <ManageRoom />
+            <AddRoom />
+          </div>
+        ) : (
+          <ManageRoom />
         )}
       </div>
     </div>

@@ -33,6 +33,19 @@
     box-shadow: var(--neon-glow);
     width: 15%;
   }
+
+  .x{
+    color: var(--neon-pink);
+    background-color: white;
+    font-weight: 800;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   
   .addRoom{
     width: 100%;

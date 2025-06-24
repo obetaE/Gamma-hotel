@@ -8,58 +8,8 @@ import {
   FaTrash,
   FaCheck,
   FaTimes,
+  FaSpinner
 } from "react-icons/fa";
-
-// Mock data based on your schema
-const mockRooms = [
-  {
-    _id: "1",
-    name: "Deluxe Ocean View",
-    tagline: "Wake up to stunning sea vistas",
-    description:
-      "Spacious room with king bed, private balcony overlooking the ocean, and luxury bathroom amenities.",
-    image: "/1.jpg",
-    amenities: [
-      "Ocean View",
-      "King Bed",
-      "Private Balcony",
-      "Minibar",
-      "Smart TV",
-    ],
-    price: 299,
-    status: true,
-    rating: 4.8,
-  },
-  {
-    _id: "2",
-    name: "Executive Suite",
-    tagline: "Business and pleasure combined",
-    description:
-      "Premium suite with separate living area, work desk, and premium amenities for the discerning traveler.",
-    image: "/1.jpg",
-    amenities: [
-      "Separate Living Area",
-      "Work Desk",
-      "Premium Wi-Fi",
-      "Coffee Machine",
-    ],
-    price: 399,
-    status: true,
-    rating: 4.5,
-  },
-  {
-    _id: "3",
-    name: "Family Suite",
-    tagline: "Comfort for the whole family",
-    description:
-      "Two connecting rooms with bunk beds for kids, game console, and family-friendly amenities.",
-    image: "/1.jpg",
-    amenities: ["Connecting Rooms", "Bunk Beds", "Game Console", "Mini Fridge"],
-    price: 459,
-    status: false,
-    rating: 4.2,
-  },
-];
 
 export default function ManageRoom() {
   const [rooms, setRooms] = useState([]);
@@ -69,15 +19,34 @@ export default function ManageRoom() {
   const [formData, setFormData] = useState({});
   const [currentAmenity, setCurrentAmenity] = useState("");
   const [loading, setLoading] = useState(false);
+  const [fetchLoading, setFetchLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    // In a real app, this would fetch from your API
-    setRooms(mockRooms);
+    const fetchRooms = async () => {
+      try {
+        setFetchLoading(true);
+        const res = await fetch("/api/room");
+        if (!res.ok) throw new Error("Failed to fetch rooms");
+        const data = await res.json();
+        setRooms(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setFetchLoading(false);
+      }
+    };
+    
+    fetchRooms();
   }, []);
 
   const openRoomDetail = (room) => {
     setSelectedRoom(room);
-    setFormData({ ...room });
+    setFormData({ 
+      ...room,
+      // Create a copy of amenities to avoid direct mutation
+      amenities: [...room.amenities] 
+    });
     setIsModalOpen(true);
     setIsEditing(false);
   };
@@ -103,6 +72,13 @@ export default function ManageRoom() {
     setFormData({
       ...formData,
       price: Number(e.target.value),
+    });
+  };
+
+  const handleTotalNoChange = (e) => {
+    setFormData({
+      ...formData,
+      totalNo: Number(e.target.value),
     });
   };
 
@@ -141,24 +117,76 @@ export default function ManageRoom() {
     }
   };
 
-  const handleSaveChanges = () => {
-    // In a real app, this would send an API request
+  const handleSaveChanges = async () => {
     setLoading(true);
-    setTimeout(() => {
-      const updatedRooms = rooms.map((room) =>
-        room._id === formData._id ? formData : room
+    setError("");
+    
+    try {
+      const res = await fetch("/api/room", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: formData._id,
+          name: formData.name,
+          tagline: formData.tagline,
+          description: formData.description,
+          highlight: formData.highlight,
+          amenities: formData.amenities,
+          price: formData.price,
+          status: formData.status,
+          totalNo: formData.totalNo
+        })
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to update room");
+      }
+
+      const data = await res.json();
+      
+      // Update the rooms list with the updated room
+      const updatedRooms = rooms.map(room => 
+        room._id === formData._id ? data.room : room
       );
+      
       setRooms(updatedRooms);
-      setLoading(false);
       setIsEditing(false);
-    }, 1000);
+      setSelectedRoom(data.room);
+    } catch (error) {
+      setError(error.message);
+      console.error("Error updating room:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleDeleteRoom = (id) => {
-    // In a real app, this would send a delete request
-    const updatedRooms = rooms.filter((room) => room._id !== id);
-    setRooms(updatedRooms);
-    closeModal();
+  const handleDeleteRoom = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this room?")) return;
+    
+    try {
+      const res = await fetch("/api/room", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id })
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to delete room");
+      }
+
+      // Update the rooms list
+      const updatedRooms = rooms.filter(room => room._id !== id);
+      setRooms(updatedRooms);
+      
+      if (selectedRoom && selectedRoom._id === id) {
+        closeModal();
+      }
+    } catch (error) {
+      setError(error.message);
+      console.error("Error deleting room:", error);
+    }
   };
 
   const renderStars = (rating) => {
@@ -171,89 +199,120 @@ export default function ManageRoom() {
     ));
   };
 
+  if (fetchLoading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <FaSpinner className={styles.spinner} />
+        <p>Loading rooms...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.errorContainer}>
+        <p>Error: {error}</p>
+        <button 
+          className={styles.retryButton}
+          onClick={() => window.location.reload()}
+        >
+          Try Again
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h1 className={styles.title}>Manage Rooms</h1>
       </div>
 
-      <div className={styles.roomsGrid}>
-        {rooms.map((room) => (
-          <div key={room._id} className={styles.card}>
-            <div className={styles.cardHeader}>
-              <span className={styles.roomName}>{room.name}</span>
-              <span
-                className={
-                  room.status
-                    ? styles.statusAvailable
-                    : styles.statusUnavailable
-                }
-              >
-                {room.status ? "Available" : "Unavailable"}
-                {room.status ? <FaCheck /> : <FaTimes />}
-              </span>
-            </div>
-
-            <div className={styles.imgContainer}>
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={room.image}
-                  alt={room.name}
-                  layout="fill"
-                  objectFit="cover"
-                  className={styles.image}
-                />
-              </div>
-              <div className={styles.priceTag}>
-                ${room.price}
-                <span>/night</span>
-              </div>
-            </div>
-
-            <div className={styles.cardBody}>
-              <p className={styles.tagline}>{room.tagline}</p>
-
-              <div className={styles.rating}>
-                <div className={styles.stars}>{renderStars(room.rating)}</div>
-                <span>{room.rating.toFixed(1)}</span>
-              </div>
-
-              <div className={styles.amenitiesPreview}>
-                {room.amenities.slice(0, 3).map((amenity, index) => (
-                  <span key={index} className={styles.amenity}>
-                    {amenity}
-                  </span>
-                ))}
-                {room.amenities.length > 3 && (
-                  <span className={styles.moreAmenities}>
-                    +{room.amenities.length - 3} more
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <div className={styles.cardFooter}>
-              <button
-                className={styles.viewButton}
-                onClick={() => openRoomDetail(room)}
-              >
-                View Details
-              </button>
-              <div className={styles.actionButtons}>
-                <button className={styles.editButton}>
-                  <FaEdit />
-                </button>
-                <button
-                  className={styles.deleteButton}
-                  onClick={() => handleDeleteRoom(room._id)}
+      {rooms.length === 0 ? (
+        <div className={styles.noRooms}>
+          <p>No rooms found. Create your first room!</p>
+        </div>
+      ) : (
+        <div className={styles.roomsGrid}>
+          {rooms.map((room) => (
+            <div key={room._id} className={styles.card}>
+              <div className={styles.cardHeader}>
+                <span className={styles.roomName}>{room.name}</span>
+                <span
+                  className={
+                    room.status
+                      ? styles.statusAvailable
+                      : styles.statusUnavailable
+                  }
                 >
-                  <FaTrash />
+                  {room.status ? "Available" : "Unavailable"}
+                  {room.status ? <FaCheck /> : <FaTimes />}
+                </span>
+              </div>
+
+              <div className={styles.imgContainer}>
+                <div className={styles.imageWrapper}>
+                  <Image
+                    src={room.image}
+                    alt={room.name}
+                    fill
+                    className={styles.image}
+                  />
+                </div>
+                <div className={styles.priceTag}>
+                  ${room.price}
+                  <span>/night</span>
+                </div>
+              </div>
+
+              <div className={styles.cardBody}>
+                <p className={styles.tagline}>{room.tagline}</p>
+
+                <div className={styles.rating}>
+                  <div className={styles.stars}>{renderStars(room.rating)}</div>
+                  <span>{room.rating.toFixed(1)}</span>
+                </div>
+
+                <div className={styles.amenitiesPreview}>
+                  {room.amenities.slice(0, 3).map((amenity, index) => (
+                    <span key={index} className={styles.amenity}>
+                      {amenity}
+                    </span>
+                  ))}
+                  {room.amenities.length > 3 && (
+                    <span className={styles.moreAmenities}>
+                      +{room.amenities.length - 3} more
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className={styles.cardFooter}>
+                <button
+                  className={styles.viewButton}
+                  onClick={() => openRoomDetail(room)}
+                >
+                  View Details
                 </button>
+                <div className={styles.actionButtons}>
+                  <button
+                    onClick={() => openRoomDetail(room)}
+                    className={styles.editButton}
+                  >
+                    <FaEdit />
+                  </button>
+                  <button
+                    className={styles.deleteButton}
+                    onClick={() => handleDeleteRoom(room._id)}
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {isModalOpen && selectedRoom && (
         <div className={styles.modalOverlay} onClick={closeModal}>
@@ -281,8 +340,7 @@ export default function ManageRoom() {
                     <Image
                       src={selectedRoom.image}
                       alt={selectedRoom.name}
-                      layout="fill"
-                      objectFit="cover"
+                      fill
                     />
                   </div>
                 </div>
@@ -290,6 +348,8 @@ export default function ManageRoom() {
                 <div className={styles.roomDetails}>
                   {isEditing ? (
                     <form className={styles.editForm}>
+                      {error && <div className={styles.formError}>{error}</div>}
+                      
                       <div className={styles.formGroup}>
                         <label>Room Name</label>
                         <input
@@ -321,12 +381,38 @@ export default function ManageRoom() {
                       </div>
 
                       <div className={styles.formGroup}>
+                        <label>Highlight Category</label>
+                        <select
+                          name="highlight"
+                          value={formData.highlight || "Most Popular"}
+                          onChange={handleInputChange}
+                        >
+                          <option value="Most Popular">Most Popular</option>
+                          <option value="Luxury Choice">Luxury Choice</option>
+                          <option value="Budget Favorite">Budget Favorite</option>
+                        </select>
+                      </div>
+
+                      <div className={styles.formGroup}>
                         <label>Price per Night ($)</label>
                         <input
                           type="number"
                           name="price"
                           value={formData.price || ""}
                           onChange={handlePriceChange}
+                          min="0"
+                          step="0.01"
+                        />
+                      </div>
+
+                      <div className={styles.formGroup}>
+                        <label>Number Available</label>
+                        <input
+                          type="number"
+                          name="totalNo"
+                          value={formData.totalNo || 1}
+                          onChange={handleTotalNoChange}
+                          min="1"
                         />
                       </div>
 
@@ -388,6 +474,10 @@ export default function ManageRoom() {
                       </div>
 
                       <div className={styles.detailRow}>
+                        <strong>Available:</strong> {selectedRoom.totalNo}
+                      </div>
+
+                      <div className={styles.detailRow}>
                         <strong>Status:</strong>
                         <span
                           className={
@@ -429,6 +519,7 @@ export default function ManageRoom() {
                     <button
                       className={styles.cancelButton}
                       onClick={() => setIsEditing(false)}
+                      disabled={loading}
                     >
                       Cancel
                     </button>
@@ -437,7 +528,13 @@ export default function ManageRoom() {
                       onClick={handleSaveChanges}
                       disabled={loading}
                     >
-                      {loading ? "Saving..." : "Save Changes"}
+                      {loading ? (
+                        <>
+                          <FaSpinner className={styles.spinner} /> Saving...
+                        </>
+                      ) : (
+                        "Save Changes"
+                      )}
                     </button>
                   </>
                 ) : (

@@ -13,6 +13,10 @@ const RoomSchema = new Schema({
         type: String,
         required: true,
     },
+    highlight: {
+        type: String,
+        required: true,
+    },
     image: {
         type: String,
         required: true,
@@ -29,6 +33,11 @@ const RoomSchema = new Schema({
     status:{
         type: Boolean,
         default: true,
+    },
+    totalNo:{
+        type: Number,
+        default: 1,
+        required: true,
     },
     rating: {
         type: Number,

@@ -1,4 +1,3 @@
-// app/book-now/page.jsx
 import styles from './bookNow.module.css';
 import Image from 'next/image';
 import Link from 'next/link';

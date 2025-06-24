@@ -1,110 +1,379 @@
-.wrapper {
-  padding: 7rem 2rem;
-  color: #eee;
-}
-.title {
-  text-align: center;
-  font-size: 2.5rem;
-  color: #A855F7;
-  margin-bottom: 0.5rem;
-}
-.subtitle {
-  text-align: center;
-  font-size: 1.1rem;
-  margin-bottom: 3rem;
-  color: #ccc;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-.card {
-  background: #1F1F2F;
-  border-radius: 1rem;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-}
-.image {
-  position: relative;
-  width: 100%;
-  height: 200px;
-}
-.img {
-  object-fit: cover;
-}
-.content {
-  padding: 1.5rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.roomName {
-  font-size: 1.5rem;
-  margin-bottom: 0.25rem;
-  color: #fff;
-}
-.tagline {
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
-  color: #ccc;
-  font-style: italic;
-}
-.desc {
-  font-size: 0.9rem;
-  flex: 1;
-  margin-bottom: 1rem;
-  color: #ddd;
-}
-.amenities {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-.amenity {
-  background: #2C2C3A;
-  padding: 0.3rem 0.6rem;
-  border-radius: 0.5rem;
-  font-size: 0.8rem;
-  color: #aaa;
-}
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.price {
-  font-weight: bold;
-  color: #FF1493;
-}
-.button {
-  background: #A855F7;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.3s ease;
-}
-.button:hover {
-  background: #9333EA;
+.container {
+  --primary-bg: #0c0115;
+  --secondary-bg: #1b0136;
+  --accent: #8c18a7;
+  --accent-dark: #45062b;
+  --card-bg: #31203a;
+  --text-light: #F4E8FF;
+  --text-muted: #E6CCFF;
+  
+  background: var(--primary-bg);
+  color: var(--text-light);
+  min-height: 100vh;
 }
 
-/* Responsive tweaks */
-@media (max-width: 640px) {
-  .image {
-    height: 160px;
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 60vh;
+  width: 100%;
+  background-image: url(https://cdn.pixabay.com/photo/2016/10/18/09/02/hotel-1749602_1280.jpg);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 0%, var(--primary-bg) 90%);
+}
+
+.heroContent {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+  z-index: 2;
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 1rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.heroSubtitle {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: var(--text-muted);
+  max-width: 700px;
+}
+
+/* Filter Section */
+.filterSection {
+  background: var(--secondary-bg);
+  padding: 2rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.filterContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  flex-wrap: wrap;
+}
+
+.filterButton {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid rgba(140, 24, 167, 0.3);
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.filterButton:hover {
+  border-color: var(--accent);
+  color: white;
+}
+
+.activeFilter {
+  background: rgba(140, 24, 167, 0.2);
+  border-color: var(--accent);
+  color: white;
+}
+
+/* Room Grid */
+.roomGridContainer {
+  max-width: 1500px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.roomGrid {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.roomCard {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.roomCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.imageContainer {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+}
+
+.roomImage {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.roomCard:hover .roomImage {
+  transform: scale(1.05);
+}
+
+.roomContent {
+  padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.roomHeader {
+  margin-bottom: 1rem;
+}
+
+.roomTitle {
+  font-size: 1.8rem;
+  margin: 0 0 0.25rem;
+  color: var(--text-light);
+}
+
+.roomTagline {
+  color: var(--accent);
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+.roomDescription {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
+  flex-grow: 1;
+}
+
+/* Amenities */
+.amenities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.amenityItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.amenityIcon {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+/* Price and CTA */
+.priceContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.price {
+  font-size: 1.8rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.night {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-left: 0.25rem;
+}
+
+.ctaButton {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+}
+
+.ctaButton:hover {
+  background: #7a1597;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(140, 24, 167, 0.4);
+}
+
+/* Highlight Badge */
+.highlightBadge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.popularBadge {
+  background: linear-gradient(45deg, #8c18a7, #45062b);
+  color: white;
+}
+
+.luxuryBadge {
+  background: linear-gradient(45deg, #974649, #31203a);
+  color: white;
+}
+
+.budgetBadge {
+  background: linear-gradient(45deg, #1b0136, #0c0115);
+  color: var(--text-muted);
+  border: 1px solid rgba(140, 24, 167, 0.3);
+}
+
+/* CTA Section */
+.ctaSection {
+  background: linear-gradient(135deg, #1b0136, #0c0115);
+  padding: 5rem 1rem;
+  margin-top: 4rem;
+  text-align: center;
+  border-top: 1px solid rgba(140, 24, 167, 0.2);
+}
+
+.ctaContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+.ctaText {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+}
+
+.ctaButtonLarge {
+  display: inline-block;
+  background: transparent;
+  color: white;
+  border: 2px solid var(--accent);
+  padding: 1rem 2.5rem;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.ctaButtonLarge:hover {
+  background: rgba(140, 24, 167, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(140, 24, 167, 0.2);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .hero {
+    height: 50vh;
   }
-  .roomName {
-    font-size: 1.3rem;
+  
+  .heroContent {
+    padding-bottom: 3rem;
+  }
+  
+  .roomGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .amenities {
+    grid-template-columns: 1fr;
+  }
+  
+  .imageContainer {
+    height: 250px;
+  }
+  
+  .priceContainer {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  
+  .ctaButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 40vh;
+  }
+  
+  .heroTitle {
+    font-size: 2rem;
+  }
+  
+  .filterContainer {
+    gap: 0.5rem;
+  }
+  
+  .filterButton {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .roomContent {
+    padding: 1.5rem;
+  }
+  
+  .roomTitle {
+    font-size: 1.5rem;
+  }
+  
+  .price {
+    font-size: 1.5rem;
+  }
+  
+  .ctaSection {
+    padding: 3rem 1rem;
   }
 }
