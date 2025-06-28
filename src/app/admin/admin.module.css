@@ -1,60 +1,121 @@
-.container{
-    --primary-bg: #1b0136;
-    --secondary-bg: #31203a;
-    --accent: #8c18a7;
-    --deep-magenta: #45062b;
-    --light-neutral: #f4e8ff;
-    --neon-pink: #ff1493;
-    --neon-glow: 0 0 15px rgba(255, 20, 147, 0.5);
-    --success: #4CAF50;
-    --error: #f44336;
-    --warning: #ff9800;
+/* admin.module.css */
+.container {
+  --primary-bg: #1b0136;
+  --secondary-bg: #31203a;
+  --accent: #8c18a7;
+  --deep-magenta: #45062b;
+  --light-neutral: #f4e8ff;
+  --neon-pink: #ff1493;
+  --neon-glow: 0 0 15px rgba(255, 20, 147, 0.5);
+  --success: #4CAF50;
+  --error: #f44336;
+  --warning: #ff9800;
 
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
 
-    padding: 6rem 0;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
 }
 
 .addButton {
-    background: linear-gradient(135deg, var(--neon-pink), var(--accent));
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-    box-shadow: var(--neon-glow);
-    width: 15%;
-  }
+  background: linear-gradient(135deg, var(--neon-pink), var(--accent));
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: var(--neon-glow);
+  min-width: 200px;
+  justify-content: center;
+  z-index: 10;
+}
 
-  .x{
-    color: var(--neon-pink);
-    background-color: white;
-    font-weight: 800;
-    width: 1.6rem;
-    height: 1.6rem;
-    border-radius: 50%;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.x {
+  color: var(--neon-pink);
+  background-color: white;
+  font-weight: 800;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.icon {
+  font-size: 1.2rem;
+}
+
+.addRoom {
+  width: 100%;
+  position: relative;
+  z-index: 888;
+}
+
+.addButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 20, 147, 0.7);
+}
+
+.content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+      padding: 1.5rem 0.5rem;
   }
   
-  .addRoom{
-    width: 100%;
-    min-height: 170vh;
-    position: relative;
-    z-index: 888;
+  .addButton {
+      padding: 0.7rem 1.2rem;
+      font-size: 0.9rem;
+      min-width: 180px;
   }
+  
+  .x {
+      width: 1.4rem;
+      height: 1.4rem;
+      font-size: 0.9rem;
+  }
+}
 
-  .addButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(255, 20, 147, 0.7);
+@media (max-width: 480px) {
+  .container {
+      padding: 1rem 0.25rem;
   }
+  
+  .addButton {
+      width: 100%;
+      max-width: 280px;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+  }
+  
+  .x {
+      width: 1.2rem;
+      height: 1.2rem;
+      font-size: 0.8rem;
+  }
+  
+  .icon {
+      font-size: 1rem;
+  }
+}

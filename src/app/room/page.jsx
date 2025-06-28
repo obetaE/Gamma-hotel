@@ -34,6 +34,8 @@ const Room = () => {
     fetchRooms();
   }, []);
 
+
+
   // Filter rooms based on category
   const filteredRooms =
     activeFilter === "all"
@@ -142,12 +144,22 @@ const Room = () => {
                       <span className={styles.price}>${room.price}</span>
                       <span className={styles.night}>/night</span>
                     </div>
-                    <Link
-                      href={`/room/${room._id}`}
-                      className={styles.ctaButton}
-                    >
-                      Reserve Now
-                    </Link>
+                    <div>
+                      {room.totalNo === 0 ? (
+                        <span
+                          className={styles.disabledButton}
+                        >
+                          Unavailable
+                        </span>
+                      ) : (
+                        <Link
+                          href={`/room/${room._id}`}
+                          className={styles.ctaButton}
+                        >
+                          Reserve Now
+                        </Link>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

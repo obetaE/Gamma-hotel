@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
+import { useRouter } from "next/navigation"
 import styles from "./sroom.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,9 +9,11 @@ import { useParams } from "next/navigation";
 
 export default function SingleRoom() {
   const { id } = useParams();
+  const route = useRouter();
   const [room, setRoom] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [disabled, setDisabled] = useState(false); 
   
   // Booking form state
   const [bookingData, setBookingData] = useState({
@@ -87,6 +90,7 @@ export default function SingleRoom() {
 
   const handleSubmitBooking = async (e) => {
     e.preventDefault();
+    setDisabled(true)
     
     // Basic validation
     if (!bookingData.name || !bookingData.email || !bookingData.checkIn || 
@@ -99,20 +103,23 @@ export default function SingleRoom() {
       const res = await fetch("/api/bookings", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           ...bookingData,
           roomId: id,
-          roomName: room.name
-        })
+          roomName: room.name,
+        }),
       });
-      
+
       if (!res.ok) {
         throw new Error("Failed to create booking");
       }
-      
+
       setShowConfirmation(true);
+      setDisabled(false);  
+      // Redirect to confirmation page with booking ID
+      // route.push(`/confirmation?bookingId=${data.customerId}`);
     } catch (error) {
       setError(error.message);
     }
@@ -266,7 +273,7 @@ export default function SingleRoom() {
 
               <div className={styles.bookingForm}>
                 {error && <div className={styles.error}>{error}</div>}
-                
+
                 <div className={styles.formGroup}>
                   <label htmlFor="name">Full Name</label>
                   <input
@@ -278,7 +285,7 @@ export default function SingleRoom() {
                     placeholder="John Doe"
                   />
                 </div>
-                
+
                 <div className={styles.formGroup}>
                   <label htmlFor="email">Email Address</label>
                   <input
@@ -290,12 +297,12 @@ export default function SingleRoom() {
                     placeholder="john@example.com"
                   />
                 </div>
-                
+
                 <div className={styles.datePicker}>
                   <div className={styles.dateGroup}>
                     <label>Check In</label>
-                    <input 
-                      type="date" 
+                    <input
+                      type="date"
                       name="checkIn"
                       value={bookingData.checkIn}
                       onChange={handleInputChange}
@@ -303,8 +310,8 @@ export default function SingleRoom() {
                   </div>
                   <div className={styles.dateGroup}>
                     <label>Check Out</label>
-                    <input 
-                      type="date" 
+                    <input
+                      type="date"
                       name="checkOut"
                       value={bookingData.checkOut}
                       onChange={handleInputChange}
@@ -321,15 +328,21 @@ export default function SingleRoom() {
                   >
                     <option value="1 Adult">1 Adult</option>
                     <option value="2 Adults">2 Adults</option>
-                    <option value="2 Adults + 1 Child">2 Adults + 1 Child</option>
-                    <option value="2 Adults + 2 Children">2 Adults + 2 Children</option>
+                    <option value="2 Adults + 1 Child">
+                      2 Adults + 1 Child
+                    </option>
+                    <option value="2 Adults + 2 Children">
+                      2 Adults + 2 Children
+                    </option>
                   </select>
                 </div>
-                
+
                 {days > 0 && (
                   <div className={styles.priceSummary}>
                     <div className={styles.priceRow}>
-                      <span>{room.price} × {days} nights</span>
+                      <span>
+                        {room.price} × {days} nights
+                      </span>
                       <span>${room.price * days}</span>
                     </div>
                     <div className={styles.priceRow}>
@@ -338,23 +351,37 @@ export default function SingleRoom() {
                     </div>
                     <div className={styles.totalPrice}>
                       <span>Total</span>
-                      <span>${bookingData.stayPrice + Math.round(bookingData.stayPrice * 0.12)}</span>
+                      <span>
+                        $
+                        {bookingData.stayPrice +
+                          Math.round(bookingData.stayPrice * 0.12)}
+                      </span>
                     </div>
                   </div>
                 )}
-                
-                <button 
-                  className={styles.bookButton}
-                  onClick={handleSubmitBooking}
-                >
-                  Book Now
-                </button>
+
+                {disabled ? (
+                  <button
+                    className={styles.disabled}
+                  >
+                   Booking Room <span className={styles.loader}></span>
+                  </button>
+                ) : (
+                  <div>
+                    <button
+                      className={styles.bookButton}
+                      onClick={handleSubmitBooking}
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
-      
+
       {/* Booking Confirmation Modal */}
       {showConfirmation && (
         <div className={styles.modalOverlay}>
@@ -362,8 +389,10 @@ export default function SingleRoom() {
             <div className={styles.modalContent}>
               <div className={styles.successIcon}>✓</div>
               <h2>Booking Confirmed!</h2>
-              <p>Your reservation at Gamma Suites has been successfully created.</p>
-              
+              <p>
+                Your reservation at Gamma Suites has been successfully created.
+              </p>
+
               <div className={styles.bookingDetails}>
                 <div className={styles.detailRow}>
                   <span>Room:</span>
@@ -371,21 +400,28 @@ export default function SingleRoom() {
                 </div>
                 <div className={styles.detailRow}>
                   <span>Check-in:</span>
-                  <span>{new Date(bookingData.checkIn).toLocaleDateString()}</span>
+                  <span>
+                    {new Date(bookingData.checkIn).toLocaleDateString()}
+                  </span>
                 </div>
                 <div className={styles.detailRow}>
                   <span>Check-out:</span>
-                  <span>{new Date(bookingData.checkOut).toLocaleDateString()}</span>
+                  <span>
+                    {new Date(bookingData.checkOut).toLocaleDateString()}
+                  </span>
                 </div>
                 <div className={styles.detailRow}>
                   <span>Total Price:</span>
                   <span>${bookingData.stayPrice}</span>
                 </div>
               </div>
-              
-              <p>A confirmation email has been sent to <strong>{bookingData.email}</strong></p>
-              
-              <button 
+
+              <p>
+                A confirmation email has been sent to{" "}
+                <strong>{bookingData.email}</strong>
+              </p>
+
+              <button
                 className={styles.closeModalButton}
                 onClick={() => setShowConfirmation(false)}
               >

@@ -1,16 +1,58 @@
 import { NextResponse } from "next/server";
-import mongoose from "mongoose"; // Import mongoose for transactions
+import mongoose from "mongoose";
 import { connectMongoDB } from "@/libs/config/db";
 import Room from "@/libs/models/Room";
 import Customer from "@/libs/models/Customer";
+import cron from "node-cron"; // For scheduling
 
-// POST new customer and update room availability
+// Initialize scheduler when module loads
+cron.schedule("0 0 * * *", async () => { // Runs daily at midnight
+  try {
+    await connectMongoDB();
+    const today = new Date();
+    
+    // Find completed stays
+    const completedCustomers = await Customer.find({
+      checkOut: { $lt: today },
+      isActive: true
+    });
+
+    for (const customer of completedCustomers) {
+      const session = await mongoose.startSession();
+      session.startTransaction();
+      
+      try {
+        // Update room availability
+        await Room.findByIdAndUpdate(
+          customer.room,
+          { $inc: { totalNo: 1 } },
+          { session }
+        );
+        
+        // Mark customer as inactive
+        customer.isActive = false;
+        await customer.save({ session });
+        
+        await session.commitTransaction();
+      } catch (error) {
+        await session.abortTransaction();
+        console.error(`Restock failed for customer ${customer._id}:`, error);
+      } finally {
+        session.endSession();
+      }
+    }
+    console.log(`Restocked ${completedCustomers.length} rooms`);
+  } catch (error) {
+    console.error("Restock job failed:", error);
+  }
+});
+
+// POST new customer (updated with isActive flag)
 export async function POST(req) {
   try {
     const { name, email, checkIn, checkOut, guests, stayPrice, roomId } =
       await req.json();
 
-    // Validate required fields
     if (!roomId) {
       return NextResponse.json(
         { message: "Room ID is required" },
@@ -23,26 +65,25 @@ export async function POST(req) {
     session.startTransaction();
 
     try {
-      // Create customer
+      // Create customer with active status
       const newCustomer = await Customer.create(
-        [
-          {
-            name,
-            email,
-            checkIn,
-            checkOut,
-            guests,
-            stayPrice,
-            room: roomId,
-          },
-        ],
+        [{
+          name,
+          email,
+          checkIn: new Date(checkIn),
+          checkOut: new Date(checkOut),
+          guests,
+          stayPrice,
+          room: roomId,
+          isActive: true // Add active status flag
+        }],
         { session }
       );
 
-      // Update room availability (atomic operation)
+      // Update room availability
       const updatedRoom = await Room.findOneAndUpdate(
-        { _id: roomId, totalNo: { $gt: 0 } }, // Ensure room exists and has availability
-        { $inc: { totalNo: -1 } }, // Decrement totalNo
+        { _id: roomId, totalNo: { $gt: 0 } },
+        { $inc: { totalNo: -1 } },
         { new: true, session }
       );
 
@@ -63,14 +104,12 @@ export async function POST(req) {
     }
   } catch (error) {
     return NextResponse.json(
-      {
-        message: "An error occurred while creating the customer",
-        error: error.message,
-      },
+      { message: "Error creating customer", error: error.message },
       { status: 500 }
     );
   }
 }
+
 
 // GET all rooms
 export async function GET() {
