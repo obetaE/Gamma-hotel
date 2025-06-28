@@ -364,7 +364,7 @@ export default function SingleRoom() {
                   <button
                     className={styles.disabled}
                   >
-                   Booking Room <span className={styles.spinner}></span>
+                   Booking Room 
                   </button>
                 ) : (
                   <div>
