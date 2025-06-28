@@ -525,7 +525,8 @@
 
 @media (max-width: 1024px) {
   .mainContent {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column-reverse;
   }
   
   .gallery {
@@ -573,11 +574,17 @@
   }
   
   .header {
-    flex-direction: column-reverse;
+    flex-direction: column;
     gap: 1rem;
   }
   
   .rating {
     align-items: flex-start;
+  }
+}
+
+@media (max-width: 380px){
+  .hero{
+    margin-top: 2.5rem;
   }
 }

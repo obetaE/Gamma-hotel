@@ -282,7 +282,7 @@ export default function SingleRoom() {
                     name="name"
                     value={bookingData.name}
                     onChange={handleInputChange}
-                    placeholder="John Doe"
+                    placeholder="Your Name"
                   />
                 </div>
 
@@ -294,7 +294,7 @@ export default function SingleRoom() {
                     name="email"
                     value={bookingData.email}
                     onChange={handleInputChange}
-                    placeholder="john@example.com"
+                    placeholder="Your Email"
                   />
                 </div>
 
@@ -364,7 +364,7 @@ export default function SingleRoom() {
                   <button
                     className={styles.disabled}
                   >
-                   Booking Room <span className={styles.loader}></span>
+                   Booking Room <span className={styles.spinner}></span>
                   </button>
                 ) : (
                   <div>
